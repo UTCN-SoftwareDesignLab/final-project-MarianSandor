@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class MemoryService {
+public class MemoryService extends PartService{
     private final MemoryRepository memoryRepository;
     private final MemoryMapper memoryMapper;
 
@@ -47,12 +47,10 @@ public class MemoryService {
     public MemoryDto edit(Long id, MemoryDto memoryDto) {
         Memory currMemory = findById(id);
 
-        currMemory.setBrand(memoryDto.getBrand());
-        currMemory.setModel(memoryDto.getModel());
+        setFromDto(currMemory, memoryDto);
+
         currMemory.setFrequency(memoryDto.getFrequency());
         currMemory.setType(memoryDto.getType());
-        currMemory.setQuantity(memoryDto.getQuantity());
-        currMemory.setPrice(memoryDto.getPrice());
         currMemory.setSize(memoryDto.getSize());
 
         return memoryMapper.toDto(memoryRepository.save(currMemory));

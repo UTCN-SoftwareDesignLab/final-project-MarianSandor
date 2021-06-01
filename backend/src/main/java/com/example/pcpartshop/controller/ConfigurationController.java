@@ -45,8 +45,8 @@ public class ConfigurationController {
     }
 
     @GetMapping(EXPORT_REPORT)
-    public void exportReport(@PathVariable Long userId, HttpServletResponse response) throws IOException {
-        String fileName = reportService.export(userId);
+    public void exportReport(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        String fileName = reportService.export(id);
 
         InputStream inputStream = new FileInputStream(fileName);
         IOUtils.copy(inputStream, response.getOutputStream());

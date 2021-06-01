@@ -35,7 +35,7 @@ public class UserController {
         return userService.search(query);
     }
 
-    @GetMapping(ENTITY + CONFIGURATIONS)
+    @GetMapping(ENTITY + "/configurations")
     public List<ConfigurationDto> configurationsForUser(@PathVariable Long id){
         return configurationService.configurationForUser(id);
     }

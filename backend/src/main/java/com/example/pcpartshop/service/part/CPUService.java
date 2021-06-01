@@ -16,7 +16,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class CPUService {
+public class CPUService extends PartService{
     private final CPURepository cpuRepository;
     private final CPUMapper cpuMapper;
 
@@ -46,13 +46,11 @@ public class CPUService {
     public CPUDto edit(Long id, CPUDto cpuDto) {
         CPU currCPU = findById(id);
 
-        currCPU.setBrand(cpuDto.getBrand());
-        currCPU.setModel(cpuDto.getModel());
+        setFromDto(currCPU, cpuDto);
+
         currCPU.setFrequency(cpuDto.getFrequency());
         currCPU.setIntegratedGraphics(cpuDto.getIntegratedGraphics());
-        currCPU.setQuantity(cpuDto.getQuantity());
         currCPU.setCores(cpuDto.getCores());
-        currCPU.setPrice(cpuDto.getPrice());
 
         return cpuMapper.toDto(cpuRepository.save(currCPU));
     }

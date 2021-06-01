@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class StorageService {
+public class StorageService extends PartService{
     private final StorageRepository storageRepository;
     private final StorageMapper storageMapper;
 
@@ -47,12 +47,10 @@ public class StorageService {
     public StorageDto edit(Long id, StorageDto storageDto) {
         Storage currStorage = findById(id);
 
-        currStorage.setBrand(storageDto.getBrand());
-        currStorage.setModel(storageDto.getModel());
+        setFromDto(currStorage, storageDto);
+
         currStorage.setCapacity(storageDto.getCapacity());
         currStorage.setType(storageDto.getType());
-        currStorage.setQuantity(storageDto.getQuantity());
-        currStorage.setPrice(storageDto.getPrice());
 
         return storageMapper.toDto(storageRepository.save(currStorage));
     }

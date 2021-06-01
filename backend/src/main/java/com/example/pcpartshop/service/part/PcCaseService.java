@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class PcCaseService {
+public class PcCaseService extends PartService {
     private final PcCaseRepository pcCaseRepository;
     private final PcCaseMapper pcCaseMapper;
 
@@ -47,11 +47,9 @@ public class PcCaseService {
     public PcCaseDto edit(Long id, PcCaseDto pcCaseDto) {
         PcCase currPcCase = findById(id);
 
-        currPcCase.setBrand(pcCaseDto.getBrand());
-        currPcCase.setModel(pcCaseDto.getModel());
+        setFromDto(currPcCase, pcCaseDto);
+
         currPcCase.setFormFactor(pcCaseDto.getFormFactor());
-        currPcCase.setQuantity(pcCaseDto.getQuantity());
-        currPcCase.setPrice(pcCaseDto.getPrice());
 
         return pcCaseMapper.toDto(pcCaseRepository.save(currPcCase));
     }

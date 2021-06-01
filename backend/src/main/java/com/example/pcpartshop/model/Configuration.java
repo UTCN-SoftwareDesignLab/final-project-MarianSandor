@@ -55,5 +55,8 @@ public class Configuration {
     private PcCase pcCase;
 
     @Column
+    private double total;
+
+    @Column
     private LocalDateTime dateCreated;
 }

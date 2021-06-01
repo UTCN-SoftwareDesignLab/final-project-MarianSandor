@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class ConfigurationService {
 
     public List<ConfigurationDto> findAll() {
         return configurationRepository.findAll().stream()
-                .sorted(Comparator.comparing(Configuration::getDateCreated))
+                .sorted(Comparator.comparing(Configuration::getDateCreated).reversed())
                 .map(configurationMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -50,7 +51,7 @@ public class ConfigurationService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found: " + userId));
 
         return configurationRepository.findConfigurationByUser(user).stream()
-                .sorted(Comparator.comparing(Configuration::getDateCreated))
+                .sorted(Comparator.comparing(Configuration::getDateCreated).reversed())
                 .map(configurationMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -72,6 +73,9 @@ public class ConfigurationService {
                 .orElseThrow(() -> new EntityNotFoundException("PSU not found: " + configurationCreationDto.getPsuId()));
         Storage storage = storageRepository.findById(configurationCreationDto.getStorageId())
                 .orElseThrow(() -> new EntityNotFoundException("Storage not found: " + configurationCreationDto.getStorageId()));
+        double total = List.of(cpu, gpu, memory, motherboard, storage, psu, pcCase).stream()
+                        .map(Part::getPrice)
+                        .reduce(0.0, Double::sum);
 
         Configuration configuration = Configuration.builder()
                 .user(user)
@@ -82,6 +86,7 @@ public class ConfigurationService {
                 .pcCase(pcCase)
                 .psu(psu)
                 .storage(storage)
+                .total(total)
                 .description(configurationCreationDto.getDescription())
                 .dateCreated(LocalDateTime.now())
                 .build();

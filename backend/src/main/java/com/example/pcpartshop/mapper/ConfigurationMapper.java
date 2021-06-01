@@ -1,6 +1,7 @@
 package com.example.pcpartshop.mapper;
 
 import com.example.pcpartshop.dto.ConfigurationDto;
+import com.example.pcpartshop.dto.part.minimal.MinimalPartDto;
 import com.example.pcpartshop.model.Configuration;
 import com.example.pcpartshop.model.part.*;
 import org.mapstruct.Mapper;
@@ -25,38 +26,66 @@ public interface ConfigurationMapper {
     ConfigurationDto toDto(Configuration configuration);
 
     @Named("getCPU")
-    static String getCPU(CPU cpu) {
-        return cpu.getBrand() + " " + cpu.getModel();
+    static MinimalPartDto getCPU(CPU cpu) {
+        return MinimalPartDto.builder()
+                .id(cpu.getId())
+                .model(cpu.getModel())
+                .brand(cpu.getBrand())
+                .build();
     }
 
     @Named("getGPU")
-    static String getGPU(GPU gpu) {
-        return gpu.getBrand() + " " + gpu.getModel();
+    static MinimalPartDto getGPU(GPU gpu) {
+        return MinimalPartDto.builder()
+                .id(gpu.getId())
+                .model(gpu.getModel())
+                .brand(gpu.getBrand())
+                .build();
     }
 
     @Named("getMemory")
-    static String getMemory(Memory memory) {
-        return memory.getBrand() + " " + memory.getModel();
+    static MinimalPartDto getMemory(Memory memory) {
+        return MinimalPartDto.builder()
+                .id(memory.getId())
+                .model(memory.getModel())
+                .brand(memory.getBrand())
+                .build();
     }
 
     @Named("getMotherboard")
-    static String getMotherboard(Motherboard motherboard) {
-        return motherboard.getBrand() + " " + motherboard.getModel();
+    static MinimalPartDto getMotherboard(Motherboard motherboard) {
+        return MinimalPartDto.builder()
+                .id(motherboard.getId())
+                .model(motherboard.getModel())
+                .brand(motherboard.getBrand())
+                .build();
     }
 
     @Named("getStorage")
-    static String getStorage(Storage storage) {
-        return storage.getBrand() + " " + storage.getModel();
+    static MinimalPartDto getStorage(Storage storage) {
+        return MinimalPartDto.builder()
+                .id(storage.getId())
+                .model(storage.getModel())
+                .brand(storage.getBrand())
+                .build();
     }
 
     @Named("getPsu")
-    static String getPsu(PSU psu) {
-        return psu.getBrand() + " " + psu.getModel();
+    static MinimalPartDto getPsu(PSU psu) {
+        return MinimalPartDto.builder()
+                .id(psu.getId())
+                .model(psu.getModel())
+                .brand(psu.getBrand())
+                .build();
     }
 
     @Named("getPcCase")
-    static String getPcCase(PcCase pcCase) {
-        return pcCase.getBrand() + " " + pcCase.getModel();
+    static MinimalPartDto getPcCase(PcCase pcCase) {
+        return MinimalPartDto.builder()
+                .id(pcCase.getId())
+                .model(pcCase.getModel())
+                .brand(pcCase.getBrand())
+                .build();
     }
 
     @Named("getDateCreated")

@@ -1,31 +1,23 @@
 package com.example.pcpartshop.dto.part;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PcCaseDto {
+public class PcCaseDto extends PartDto{
 
-    private Long id;
-    private String brand;
-    private String model;
     private String formFactor;
-    private double price;
-    private int quantity;
 
     @Override
     public String toString() {
-        return "PcCaseDto{" +
+        return "PcCase {" +
                 "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", formFactor='" + formFactor + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

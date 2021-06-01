@@ -1,6 +1,7 @@
 package com.example.pcpartshop.repository;
 
 import com.example.pcpartshop.model.User;
+import com.example.pcpartshop.model.part.CPU;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

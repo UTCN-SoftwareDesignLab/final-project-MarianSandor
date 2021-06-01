@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class MotherboardService {
+public class MotherboardService extends PartService{
     private final MotherboardRepository motherboardRepository;
     private final MotherboardMapper motherboardMapper;
 
@@ -47,12 +47,10 @@ public class MotherboardService {
     public MotherboardDto edit(Long id, MotherboardDto motherboardDto) {
         Motherboard currMotherboard = findById(id);
 
-        currMotherboard.setBrand(motherboardDto.getBrand());
-        currMotherboard.setModel(motherboardDto.getModel());
+        setFromDto(currMotherboard, motherboardDto);
+
         currMotherboard.setFormFactor(motherboardDto.getFormFactor());
         currMotherboard.setSocket(motherboardDto.getSocket());
-        currMotherboard.setQuantity(motherboardDto.getQuantity());
-        currMotherboard.setPrice(motherboardDto.getPrice());
 
         return motherboardMapper.toDto(motherboardRepository.save(currMotherboard));
     }

@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class GPUService {
+public class GPUService extends PartService{
     private final GPURepository gpuRepository;
     private final GPUMapper gpuMapper;
 
@@ -47,12 +47,10 @@ public class GPUService {
     public GPUDto edit(Long id, GPUDto gpuDto) {
         GPU currGPU = findById(id);
 
-        currGPU.setBrand(gpuDto.getBrand());
-        currGPU.setModel(gpuDto.getModel());
+        setFromDto(currGPU, gpuDto);
+
         currGPU.setFrequency(gpuDto.getFrequency());
         currGPU.setVram(gpuDto.getVram());
-        currGPU.setQuantity(gpuDto.getQuantity());
-        currGPU.setPrice(gpuDto.getPrice());
 
         return gpuMapper.toDto(gpuRepository.save(currGPU));
     }

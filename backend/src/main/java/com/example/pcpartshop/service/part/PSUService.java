@@ -17,7 +17,7 @@ import static com.example.pcpartshop.repository.specification.PartSpecification.
 
 @Service
 @RequiredArgsConstructor
-public class PSUService {
+public class PSUService extends PartService{
     private final PSURepository psuRepository;
     private final PSUMapper psuMapper;
 
@@ -47,13 +47,11 @@ public class PSUService {
     public PSUDto edit(Long id, PSUDto psuDto) {
         PSU currPSU = findById(id);
 
-        currPSU.setBrand(psuDto.getBrand());
-        currPSU.setModel(psuDto.getModel());
+        setFromDto(currPSU, psuDto);
+
         currPSU.setFormFactor(psuDto.getFormFactor());
         currPSU.setEfficiency(psuDto.getEfficiency());
         currPSU.setWattage(psuDto.getWattage());
-        currPSU.setQuantity(psuDto.getQuantity());
-        currPSU.setPrice(psuDto.getPrice());
 
         return psuMapper.toDto(psuRepository.save(currPSU));
     }

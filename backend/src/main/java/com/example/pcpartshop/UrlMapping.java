@@ -21,7 +21,7 @@ public class UrlMapping {
     public static final String PC_CASE = API_PATH + "/pcCase";
     public static final String STORAGE = API_PATH + "/storage";
 
-    public static final String EXPORT_REPORT = "/export/{userId}";
+    public static final String EXPORT_REPORT = "/export/{id}";
 
     public static final String MESSAGE = "/message";
     public static final String TOPIC = "/topic";

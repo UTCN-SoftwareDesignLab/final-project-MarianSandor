@@ -3,6 +3,7 @@ package com.example.pcpartshop.service;
 import com.example.pcpartshop.model.Configuration;
 import com.example.pcpartshop.model.part.*;
 import com.example.pcpartshop.repository.ConfigurationRepository;
+import com.example.pcpartshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -44,13 +45,11 @@ public class ReportService {
         contents.setFont(PDType1Font.HELVETICA_BOLD, 20);
         contents.newLineAtOffset(220, 700);
         contents.showText("Configuration");
-        contents.newLine();
-        contents.showText(configuration.getDateCreated().format(formatter));
         contents.endText();
 
         contents.beginText();
         contents.setFont(PDType1Font.TIMES_BOLD, 14);
-        contents.newLineAtOffset(50, 600);
+        contents.newLineAtOffset(70, 600);
         contents.setLeading(15f);
 
         contents.showText(formatCPU(configuration.getCpu()));
@@ -67,9 +66,16 @@ public class ReportService {
         contents.newLine();
         contents.showText(formatPcCase(configuration.getPcCase()));
         contents.newLine();
+        contents.showText("Total: " + String.format("%.2f",configuration.getTotal()));
+        contents.newLine();
 
         contents.newLine();
         contents.showText(configuration.getDescription());
+
+        contents.newLine();
+        contents.newLine();
+        contents.setLeading(50f);
+        contents.showText("Date: " + configuration.getDateCreated().format(formatter));
 
         contents.endText();
 
@@ -82,7 +88,7 @@ public class ReportService {
     }
 
     private static String formatCPU(CPU cpu) {
-        return  "Processor " +
+        return  "Processor: " +
                 cpu.getBrand() + " " +
                 cpu.getModel() + " " +
                 cpu.getCores() + " cores " +
@@ -92,7 +98,7 @@ public class ReportService {
     }
 
     private static String formatGPU(GPU gpu) {
-        return  "Graphics Card " +
+        return  "Graphics Card: " +
                 gpu.getBrand() + " " +
                 gpu.getModel() + " " +
                 gpu.getVram() + "GB " +
@@ -101,7 +107,7 @@ public class ReportService {
     }
 
     private static String formatMemory(Memory memory) {
-        return  "Memory " +
+        return  "Memory: " +
                 memory.getBrand() + " " +
                 memory.getModel() + " " +
                 memory.getType() + " " +
@@ -111,7 +117,7 @@ public class ReportService {
     }
 
     private static String formatMotherboard(Motherboard motherboard) {
-        return  "Motherboard " +
+        return  "Motherboard: " +
                 motherboard.getBrand() + " " +
                 motherboard.getModel() + " " +
                 motherboard.getFormFactor() + " " +
@@ -120,7 +126,7 @@ public class ReportService {
     }
 
     private static String formatPcCase(PcCase pcCase) {
-        return  "PC Case " +
+        return  "PC Case: " +
                 pcCase.getBrand() + " " +
                 pcCase.getModel() + " " +
                 pcCase.getFormFactor() + " " +
@@ -128,7 +134,7 @@ public class ReportService {
     }
 
     private static String formatPSU(PSU psu) {
-        return  "Power Supply " +
+        return  "Power Supply: " +
                 psu.getBrand() + " " +
                 psu.getModel() + " " +
                 psu.getFormFactor() + " " +
@@ -138,7 +144,7 @@ public class ReportService {
     }
 
     private static String formatStorage(Storage storage) {
-        return  "Hard Disk Drive " +
+        return  "Hard Disk Drive: " +
                 storage.getBrand() + " " +
                 storage.getModel() + " " +
                 storage.getCapacity() + "GB " +
