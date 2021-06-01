@@ -12,9 +12,10 @@ There are three types of users: Admin, Employee and Customer
 * Create configurations on request from customers
 
 ### Customer
-* View pc parts and configurations made for him.
+* View pc parts and configurations made for him
+* Request help for bulding a configuration
 * Download pdf report of a configuration
-* Order parts and receive confirmation email.
+* Order parts and receive confirmation email
 
 ## Features
 * CRUD
